@@ -1,22 +1,34 @@
 package com.oceanview.dao;
 
+import com.oceanview.model.User;
 import com.oceanview.util.DBConnection;
+
 import java.sql.*;
 
 public class UserDAO {
-    public boolean login(String username, String password) {
-        String sql = "SELECT * FROM users WHERE username = ? AND password = ?";
-        try (Connection conn = DBConnection.getConnection();
+
+    public User findByUsername(String username) {
+
+        String sql = "SELECT * FROM users WHERE username = ?";
+
+        try (Connection conn = DBConnection.getInstance().getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
 
             ps.setString(1, username);
-            ps.setString(2, password);
             ResultSet rs = ps.executeQuery();
 
-            return rs.next(); // Returns true if user exists [cite: 24]
+            if (rs.next()) {
+                return new User(
+                        rs.getInt("id"),
+                        rs.getString("username"),
+                        rs.getString("password")
+                );
+            }
+
         } catch (SQLException e) {
             e.printStackTrace();
-            return false;
         }
+
+        return null;
     }
 }
