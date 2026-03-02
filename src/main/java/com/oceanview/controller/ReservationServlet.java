@@ -35,6 +35,9 @@ public class ReservationServlet extends HttpServlet {
         ReservationService service = new ReservationService();
         service.createReservation(reservation);
 
+        double bill = service.createReservation(reservation);
+
         response.getWriter().println("Reservation Added Successfully!");
+        response.getWriter().println("Total Bill: LKR " + bill);
     }
 }
