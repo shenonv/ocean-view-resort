@@ -4,6 +4,7 @@ import com.oceanview.model.Reservation;
 import com.oceanview.service.ReservationService;
 
 import javax.servlet.*;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 
 import javax.servlet.ServletException;
@@ -12,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.time.LocalDate;
-
+@WebServlet("/addReservation")
 public class ReservationServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request,
@@ -37,7 +38,8 @@ public class ReservationServlet extends HttpServlet {
 
         double bill = service.createReservation(reservation);
 
-        response.getWriter().println("Reservation Added Successfully!");
-        response.getWriter().println("Total Bill: LKR " + bill);
+        request.setAttribute("totalBill", bill);
+        request.getRequestDispatcher("reservationSuccess.jsp")
+                .forward(request, response);
     }
 }

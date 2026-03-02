@@ -16,10 +16,12 @@ public class UserDAO {
 
             ps.setString(1, username);
             ResultSet rs = ps.executeQuery();
+            System.out.println("Username entered: " + username);
 
             if (rs.next()) {
+                System.out.println("User found in database!");
                 return new User(
-                        rs.getInt("id"),
+                        rs.getInt("user_id"),
                         rs.getString("username"),
                         rs.getString("password")
                 );
