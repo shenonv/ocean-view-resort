@@ -5,30 +5,18 @@ import java.sql.DriverManager;
 
 public class DBConnection {
 
-    private static DBConnection instance;
-    private Connection connection;
+    private static final String url = "jdbc:mysql://localhost:3306/ocean_view_db";
+    private static final String username = "root";
+    private static final String password = "";
 
-    private final String url = "jdbc:mysql://localhost:3306/ocean_view_db";
-    private final String username = "root";
-    private final String password = "";
+    public static Connection getConnection() {
 
-    private DBConnection() {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            connection = DriverManager.getConnection(url, username, password);
+            return DriverManager.getConnection(url, username, password);
         } catch (Exception e) {
             e.printStackTrace();
+            return null;
         }
-    }
-
-    public static DBConnection getInstance() {
-        if (instance == null) {
-            instance = new DBConnection();
-        }
-        return instance;
-    }
-
-    public Connection getConnection() {
-        return connection;
     }
 }

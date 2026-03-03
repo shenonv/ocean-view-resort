@@ -1,20 +1,21 @@
 package com.oceanview.factory;
 
-import com.oceanview.model.DeluxeRoom;
-import com.oceanview.model.Room;
-import com.oceanview.model.StandardRoom;
-import com.oceanview.model.SuiteRoom;
+import com.oceanview.model.*;
 
 public class RoomFactory {
+
     public static Room createRoom(String type) {
-        if (type.equalsIgnoreCase("Standerd")) {
+
+        if (type.equalsIgnoreCase("Standard")) {
             return new StandardRoom();
         }
-        else if (type.equalsIgnoreCase("Delux")) {
+        else if (type.equalsIgnoreCase("Deluxe")) {
             return new DeluxeRoom();
-        } else if (type.equalsIgnoreCase("Suite")) {
+        }
+        else if (type.equalsIgnoreCase("Suite")) {
             return new SuiteRoom();
         }
+
         throw new IllegalArgumentException("Invalid room type: " + type);
     }
 }

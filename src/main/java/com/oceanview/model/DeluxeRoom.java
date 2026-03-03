@@ -2,7 +2,7 @@ package com.oceanview.model;
 
 public class DeluxeRoom extends Room {
     public DeluxeRoom() {
-        this.type = "Delux";
+        this.type = "Deluxe";
         this.pricePerNight = 8000;
     }
 }
