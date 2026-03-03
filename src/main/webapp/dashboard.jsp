@@ -14,6 +14,8 @@
 <a href="addReservation.jsp">Add New Reservation</a><br><br>
 <a href="viewReservation.jsp">View Reservation</a><br><br>
 <a href="logout">Logout</a>
+<br>
+<a href="help.jsp">Help Section</a><br><br>
 
 </body>
 </html>
