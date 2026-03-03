@@ -11,7 +11,7 @@ public class UserDAO {
 
         String sql = "SELECT * FROM users WHERE username = ?";
 
-        try (Connection conn = DBConnection.getInstance().getConnection();
+        try (Connection conn = DBConnection.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
 
             ps.setString(1, username);

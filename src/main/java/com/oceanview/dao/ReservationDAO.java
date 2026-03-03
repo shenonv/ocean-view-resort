@@ -9,25 +9,32 @@ import java.sql.PreparedStatement;
 
 public class ReservationDAO {
     public boolean save(Reservation reservation) {
-        String sql = "INSERT INTO reservations VALUES (?,?, ?, ?, ?, ?, ?)";
 
-        try {
-            Connection con = DBConnection.getInstance().getConnection();
-            PreparedStatement ps = con.prepareStatement(sql);
+        String sql = "INSERT INTO reservations " +
+                "(guest_name, address, contact_number, room_type, check_in_date, check_out_date) " +
+                "VALUES (?, ?, ?, ?, ?, ?)";
 
-            ps.setInt(1, reservation.getReservationId());
-            ps.setString(2, reservation.getGuestName());
-            ps.setString(3, reservation.getAddress());
-            ps.setString(4, reservation.getContactNumber());
-            ps.setString(5, reservation.getRoomType());
-            ps.setDate(6, Date.valueOf(reservation.getCheckInDate()));
-            ps.setDate(7, Date.valueOf(reservation.getCheckOutDate()));
+        try (Connection con = DBConnection.getConnection();
+             PreparedStatement ps = con.prepareStatement(sql)) {
 
-            return ps.executeUpdate() > 0;
+            System.out.println("DB Connection: " + con);
+
+            ps.setString(1, reservation.getGuestName());
+            ps.setString(2, reservation.getAddress());
+            ps.setString(3, reservation.getContactNumber());
+            ps.setString(4, reservation.getRoomType());
+            ps.setDate(5, java.sql.Date.valueOf(reservation.getCheckInDate()));
+            ps.setDate(6, java.sql.Date.valueOf(reservation.getCheckOutDate()));
+
+            int rows = ps.executeUpdate();
+            System.out.println("Rows inserted: " + rows);
+
+            return rows > 0;
 
         } catch (Exception e) {
+            System.out.println("===== DATABASE ERROR =====");
             e.printStackTrace();
+            return false;
         }
-        return false;
     }
 }

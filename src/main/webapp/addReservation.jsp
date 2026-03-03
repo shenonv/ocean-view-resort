@@ -8,9 +8,6 @@
 
 <form action="addReservation" method="post">
 
-  Reservation ID:
-  <input type="number" name="reservationId" required><br><br>
-
   Guest Name:
   <input type="text" name="guestName" required><br><br>
 

@@ -31,14 +31,14 @@ public class ReservationService {
 
         BillingStrategy strategy;
 
-        switch (room.getType()) {
-            case "Standerd":
+        switch (room.getType().toLowerCase()) {
+            case "standard":
                 strategy = new StandardBillingStrategy();
                 break;
-            case "Deluxe":
+            case "deluxe":
                 strategy = new DeluxeBillingStrategy();
                 break;
-            case "Suite":
+            case "suite":
                 strategy = new SuiteBillingStrategy();
                 break;
             default:
@@ -48,7 +48,12 @@ public class ReservationService {
                 (int)nights,
                 room.getPricePerNight()
         );
-        reservationDAO.save(reservation);
+        boolean saved = reservationDAO.save(reservation);
+
+        if (!saved) {
+            throw new RuntimeException("Failed to save reservation");
+        }
+
         return totalBill;
     }
 }
