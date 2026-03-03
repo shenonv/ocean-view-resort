@@ -1,6 +1,7 @@
 package com.oceanview.controller;
 
 import com.oceanview.model.Reservation;
+import com.oceanview.model.ReservationResult;
 import com.oceanview.service.ReservationService;
 
 import javax.servlet.*;
@@ -33,9 +34,10 @@ public class ReservationServlet extends HttpServlet {
 
         ReservationService service = new ReservationService();
 
-        double bill = service.createReservation(reservation);
+        ReservationResult result = service.createReservation(reservation);
 
-        request.setAttribute("totalBill", bill);
+        request.setAttribute("reservationId", result.getReservationId());
+        request.setAttribute("totalBill", result.getTotalBill());
         request.getRequestDispatcher("reservationSuccess.jsp")
                 .forward(request, response);
     }
