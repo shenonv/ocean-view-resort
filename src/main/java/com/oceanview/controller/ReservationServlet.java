@@ -38,7 +38,9 @@ public class ReservationServlet extends HttpServlet {
 
         request.setAttribute("reservationId", result.getReservationId());
         request.setAttribute("totalBill", result.getTotalBill());
+        request.setAttribute("reservation", reservation);
         request.getRequestDispatcher("reservationSuccess.jsp")
                 .forward(request, response);
+
     }
 }
