@@ -1,37 +1,34 @@
 <%@ page import="com.oceanview.model.Reservation" %>
-<html>
-<head>
-  <title>Print Bill</title>
-</head>
-<body>
+  <html>
 
-<h2>Ocean View Resort - Invoice</h2>
+  <head>
+    <title>Print Bill</title>
+  </head>
 
-<%
-  Reservation res = (Reservation) request.getAttribute("reservation");
-  if (res != null) {
-%>
+  <body>
 
-Reservation ID: ${reservationId} <br>
-Guest Name: <%= res.getGuestName() %><br>
-Room Type: <%= res.getRoomType() %><br>
-Check-in Date: <%= res.getCheckInDate() %><br>
-Check-out Date: <%= res.getCheckOutDate() %><br>
+    <h2>Ocean View Resort - Invoice</h2>
 
-<hr>
+    <% Reservation res=(Reservation) request.getAttribute("reservation"); if (res !=null) { %>
 
-<button onclick="window.print()">Print</button>
+      Reservation ID: ${reservationId} <br>
+      Guest Name: <%= res.getGuestName() %><br>
+        Email: <%= (res.getEmail() !=null && !res.getEmail().isEmpty()) ? res.getEmail() : "N/A" %><br>
+          Room Type: <%= res.getRoomType() %><br>
+            Check-in Date: <%= res.getCheckInDate() %><br>
+              Check-out Date: <%= res.getCheckOutDate() %><br>
 
-<%
-} else {
-%>
-<p style="color:red;">Reservation not found.</p>
-<%
-  }
-%>
+                <hr>
 
-<br><br>
-<a href="dashboard.jsp">Back to Dashboard</a>
+                <button onclick="window.print()">Print</button>
 
-</body>
-</html>
+                <% } else { %>
+                  <p style="color:red;">Reservation not found.</p>
+                  <% } %>
+
+                    <br><br>
+                    <a href="dashboard.jsp">Back to Dashboard</a>
+
+  </body>
+
+  </html>
