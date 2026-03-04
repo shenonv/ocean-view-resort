@@ -1,0 +1,16 @@
+# ============================================================
+#  OceanView Resort — Email Configuration TEMPLATE
+#  Copy this file to email.properties and fill in real values.
+#  NEVER put real credentials in this file.
+# ============================================================
+
+# Gmail address used as the sender
+email.sender=your-email@gmail.com
+
+# Gmail App Password (NOT your normal Gmail password)
+# Generate one at: Google Account → Security → App Passwords
+email.password=your-app-password
+
+# SMTP settings (defaults work for Gmail)
+email.smtp.host=smtp.gmail.com
+email.smtp.port=587

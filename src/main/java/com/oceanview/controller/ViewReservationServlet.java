@@ -21,7 +21,13 @@ public class ViewReservationServlet extends HttpServlet {
 
         Reservation reservation = service.getReservation(id);
 
-        request.setAttribute("reservation", reservation);
+        if (reservation == null) {
+            request.setAttribute("errorMessage",
+                    "No reservation found for ID: " + id);
+        } else {
+            request.setAttribute("reservation", reservation);
+        }
+
         request.getRequestDispatcher("viewReservation.jsp")
                 .forward(request, response);
     }

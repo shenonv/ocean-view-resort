@@ -5,17 +5,21 @@ import java.time.LocalDate;
 public class Reservation {
     private int reservationId;
     private String guestName;
+    private String email;
     private String address;
     private String contactNumber;
     private String roomType;
     private LocalDate checkInDate;
     private LocalDate checkOutDate;
 
-    public Reservation() {}
+    public Reservation() {
+    }
 
-    public Reservation(int reservationId, String guestName, String address, String contactNumber, String roomType, LocalDate checkInDate,LocalDate checkOutDate) {
+    public Reservation(int reservationId, String guestName, String email, String address, String contactNumber,
+            String roomType, LocalDate checkInDate, LocalDate checkOutDate) {
         this.reservationId = reservationId;
         this.guestName = guestName;
+        this.email = email;
         this.address = address;
         this.contactNumber = contactNumber;
         this.roomType = roomType;
@@ -39,6 +43,14 @@ public class Reservation {
         this.guestName = guestName;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     public String getAddress() {
         return address;
     }
@@ -58,6 +70,7 @@ public class Reservation {
     public String getRoomType() {
         return roomType;
     }
+
     public void setRoomType(String roomType) {
         this.roomType = roomType;
     }

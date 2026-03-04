@@ -2,6 +2,7 @@ package com.oceanview.controller;
 
 import com.oceanview.model.Reservation;
 import com.oceanview.model.ReservationResult;
+import com.oceanview.observer.EmailNotificationService;
 import com.oceanview.service.ReservationService;
 
 import javax.servlet.*;
@@ -14,10 +15,11 @@ import java.time.LocalDate;
 public class ReservationServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request,
-                          HttpServletResponse response)
+            HttpServletResponse response)
             throws ServletException, IOException {
 
         String guestName = request.getParameter("guestName");
+        String email = request.getParameter("email");
         String address = request.getParameter("address");
         String contact = request.getParameter("contactNumber");
         String roomType = request.getParameter("roomType");
@@ -26,6 +28,7 @@ public class ReservationServlet extends HttpServlet {
 
         Reservation reservation = new Reservation();
         reservation.setGuestName(guestName);
+        reservation.setEmail(email);
         reservation.setAddress(address);
         reservation.setContactNumber(contact);
         reservation.setRoomType(roomType);
@@ -34,6 +37,9 @@ public class ReservationServlet extends HttpServlet {
 
         ReservationService service = new ReservationService();
 
+        // 🔔 Register the email observer — fires automatically after save
+        service.addObserver(new EmailNotificationService());
+
         ReservationResult result = service.createReservation(reservation);
 
         request.setAttribute("reservationId", result.getReservationId());
@@ -41,6 +47,5 @@ public class ReservationServlet extends HttpServlet {
         request.setAttribute("reservation", reservation);
         request.getRequestDispatcher("reservationSuccess.jsp")
                 .forward(request, response);
-
     }
 }
