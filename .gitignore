@@ -1,3 +1,6 @@
+### Credentials & Secrets ###
+src/main/resources/email.properties
+
 target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/

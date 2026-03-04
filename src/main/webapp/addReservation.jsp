@@ -9,6 +9,7 @@
       let isValid = true;
 
       let name = document.forms["resForm"]["guestName"].value.trim();
+      let email = document.forms["resForm"]["email"].value.trim();
       let address = document.forms["resForm"]["address"].value.trim();
       let contact = document.forms["resForm"]["contactNumber"].value.trim();
       let checkIn = document.forms["resForm"]["checkInDate"].value;
@@ -27,6 +28,15 @@
         document.getElementById("errorBox").innerHTML =
                 "Guest name can contain only letters and spaces.";
         return false;
+      }
+
+      // Email validation
+      if (email !== "") {
+          let emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+          if (!emailPattern.test(email)) {
+            document.getElementById("errorBox").innerHTML = "Please enter a valid email address.";
+            return false;
+          }
       }
 
       // Address validation
@@ -75,6 +85,11 @@
     <tr>
       <td>Guest Name:</td>
       <td><input type="text" name="guestName"></td>
+    </tr>
+
+    <tr>
+      <td>Email (Optional):</td>
+      <td><input type="email" name="email" placeholder="guest@example.com"></td>
     </tr>
 
     <tr>
