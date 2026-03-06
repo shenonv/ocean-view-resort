@@ -10,8 +10,8 @@ public class AuthenticationFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest request,
-                         ServletResponse response,
-                         FilterChain chain)
+            ServletResponse response,
+            FilterChain chain)
             throws IOException, ServletException {
 
         HttpServletRequest req = (HttpServletRequest) request;
@@ -19,8 +19,10 @@ public class AuthenticationFilter implements Filter {
 
         String uri = req.getRequestURI();
 
-        // Allow login page & login servlet
-        if (uri.contains("login") || uri.contains("login.jsp") || uri.contains("css") || uri.contains("js")) {
+        // Allow login page, login servlet, and static resources only
+        if (uri.endsWith("login.jsp") || uri.contains("/login") ||
+                uri.endsWith(".css") || uri.endsWith(".js") ||
+                uri.endsWith(".png") || uri.endsWith(".jpg") || uri.endsWith(".ico")) {
             chain.doFilter(request, response);
             return;
         }
@@ -30,7 +32,7 @@ public class AuthenticationFilter implements Filter {
         if (session != null && session.getAttribute("username") != null) {
             chain.doFilter(request, response);
         } else {
-            res.sendRedirect("login.jsp");
+            res.sendRedirect(req.getContextPath() + "/login.jsp");
         }
     }
 }

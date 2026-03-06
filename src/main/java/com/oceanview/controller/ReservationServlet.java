@@ -37,10 +37,10 @@ public class ReservationServlet extends HttpServlet {
 
         ReservationService service = new ReservationService();
 
-        // 🔔 Register the email observer — fires automatically after save
-        service.addObserver(new EmailNotificationService());
-
         ReservationResult result = service.createReservation(reservation);
+
+        EmailNotificationService emailService = new EmailNotificationService();
+        emailService.onReservationCreated(reservation);
 
         request.setAttribute("reservationId", result.getReservationId());
         request.setAttribute("totalBill", result.getTotalBill());
