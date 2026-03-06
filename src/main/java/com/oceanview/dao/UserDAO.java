@@ -12,7 +12,7 @@ public class UserDAO {
         String sql = "SELECT * FROM users WHERE username = ?";
 
         try (Connection conn = DBConnection.getConnection();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
+                PreparedStatement ps = conn.prepareStatement(sql)) {
 
             ps.setString(1, username);
             ResultSet rs = ps.executeQuery();
@@ -23,8 +23,7 @@ public class UserDAO {
                 return new User(
                         rs.getInt("user_id"),
                         rs.getString("username"),
-                        rs.getString("password")
-                );
+                        rs.getString("password"));
             }
 
         } catch (SQLException e) {
