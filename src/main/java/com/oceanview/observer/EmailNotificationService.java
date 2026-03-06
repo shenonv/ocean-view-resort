@@ -9,13 +9,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
-/**
- * Observer that sends a booking confirmation email to the guest
- * whenever a new reservation is created.
- *
- * Credentials are loaded from: src/main/resources/email.properties
- * Copy email.properties.example → email.properties and fill in your values.
- */
 public class EmailNotificationService implements ReservationObserver {
 
     private final String smtpHost;
