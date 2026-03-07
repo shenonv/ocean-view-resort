@@ -88,17 +88,26 @@ This project implements **four classic GoF design patterns** to ensure a high-qu
 
 ---
 
-## 🏗️ Git Workflow & Branching
+## 🏗️ Version Control & Git Workflow
 
-The project follows a rigorous **feature-branch workflow** to maintain stability. The repository currently consists of **14 distinct branches** and **34 commits** mapping out the full development lifecycle.
+This project utilizes Git for version control, strictly adhering to a **feature-branch workflow** to maintain code stability and ease of integration. The repository currently consists of **14 distinct branches** and **34 commits** mapping out the full development lifecycle.
+
+### Branching Strategy
 
 | Branch | Purpose |
 |---|---|
-| `master` | Stable, production-ready release branch. |
-| `development` | Main integration branch for combining features. |
+| `master` | Stable, production-ready release branch (`v1`, `v2`, etc.). |
+| `development` | Main integration branch for combining and testing features. |
 | `JUnit-testing` | Implementation of automated test suites (TDD). |
 | `feature/*` | Isolated development for specific modules (Login, Billing, etc). |
 | `bugfix/*` | Dedicated branches for critical logic and security fixes. |
+
+### Version History
+
+The application iterations are tracked via major version releases on the `master` branch:
+
+- **v1 (Version 1.0):** Initial release. Includes core functionality: RBAC Security, standard Room Booking, and foundational database schema.
+- **v2 (Version 2.0):** Enhanced release. Introduces GoF design patterns like Dynamic Billing strategies, Email Confirmations (Observer pattern), Bill Printing, and a comprehensive JUnit Test Suite.
 
 ---
 
